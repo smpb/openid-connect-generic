@@ -167,6 +167,12 @@ class OpenID_Connect_Generic_Settings_Page {
 				'type'        => 'checkbox',
 				'section'     => 'user_settings',
 			),
+			'create_new_users'   => array(
+				'title'       => __( 'Create New Users' ),
+				'description' => __( 'After a successful OpenID Connect authentication, if the user\'s identity is not linked to an existing Wordpress account, it is created. Otherwise, if this setting is not enabled, the authentication fails.' ),
+				'type'        => 'checkbox',
+				'section'     => 'user_settings',
+			),
 			'redirect_user_back'   => array(
 				'title'       => __( 'Redirect Back to Origin Page' ),
 				'description' => __( 'After a successful OpenID Connect authentication, this will redirect the user back to the page on which they clicked the OpenID Connect login button. This will cause the login process to proceed in a traditional WordPress fashion. For example, users logging in through the default wp-login.php page would end up on the WordPress Dashboard and users logging in through the WooCommerce "My Account" page would end up on their account page.' ),

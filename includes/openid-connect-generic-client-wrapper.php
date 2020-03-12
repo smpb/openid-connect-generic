@@ -358,10 +358,14 @@ class OpenID_Connect_Generic_Client_Wrapper {
 
 		// if we didn't find an existing user, we'll need to create it
 		if ( ! $user ) {
-			$user = $this->create_new_user( $subject_identity, $user_claim );
-			if ( is_wp_error( $user ) ) {
-				$this->error_redirect( $user );
-				return;
+			if ( $this->settings->create_new_users ) {
+				$user = $this->create_new_user( $subject_identity, $user_claim );
+				if ( is_wp_error( $user ) ) {
+					$this->error_redirect( $user );
+					return;
+				}
+			} else {
+				$this->error_redirect(new WP_Error( 'identity-not-map-existing-user', __( 'Identity is not linked to an existing user.' ), $user_claim ));
 			}
 		}
 		else {
