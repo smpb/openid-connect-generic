@@ -197,6 +197,12 @@ class OpenID_Connect_Generic_Settings_Page {
 				'type'        => 'number',
 				'section'     => 'log_settings',
 			),
+			'only_super_admins' => array(
+				'title'       => __( 'Super Admins Only' ),
+				'description' => __( 'In a multisite environment, make the plugin\'s options only visible to super admins.' ),
+				'type'        => 'checkbox',
+				'section'     => 'plugin_settings',
+			),
 		);
 
 		$fields = apply_filters( 'openid-connect-generic-settings-fields', $fields );
@@ -272,6 +278,12 @@ class OpenID_Connect_Generic_Settings_Page {
 		add_settings_section( 'log_settings',
 			__( 'Log Settings' ),
 			array( $this, 'log_settings_description' ),
+			$this->options_page_name
+		);
+
+		add_settings_section( 'plugin_settings',
+			__( 'Plugin Settings' ),
+			array( $this, 'plugin_settings_description' ),
 			$this->options_page_name
 		);
 
@@ -459,5 +471,9 @@ class OpenID_Connect_Generic_Settings_Page {
 
 	public function log_settings_description() {
 		_e( 'Log information about login attempts through OpenID Connect Generic' );
+	}
+
+	public function plugin_settings_description() {
+		_e( 'Control finer points directly related to the plugin' );
 	}
 }

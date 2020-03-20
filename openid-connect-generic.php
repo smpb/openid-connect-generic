@@ -112,7 +112,9 @@ class OpenID_Connect_Generic {
 
 		$this->upgrade();
 
-		if ( is_admin() ){
+		$is_admin = ( is_multisite() && $this->settings->only_super_admins ) ? is_super_admin() : is_admin();
+
+		if ( $is_admin ) {
 			$this->settings_page = OpenID_Connect_Generic_Settings_Page::register( $this->settings, $this->logger );
 		}
 	}
@@ -228,6 +230,7 @@ class OpenID_Connect_Generic {
 				'identify_with_username' => false,
 
 				// plugin settings
+				'only_super_admins' => 0,
 				'enforce_privacy' => 0,
 				'alternate_redirect_uri' => 0,
 				'link_existing_users' => 0,
